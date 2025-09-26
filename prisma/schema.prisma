@@ -1,5 +1,3 @@
-
-
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
@@ -10,15 +8,57 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Post {
-  id Int @id @default(autoincrement())
-  title String @db.VarChar(255)
-  content String?
-  published Boolean @default(false)
-  authorId Int? 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           Int            @id @default(autoincrement())
+  title        String         @db.VarChar(255)
+  content      String?
+  published    Boolean        @default(false)
+  authorId     Int
+  author       User           @relation(fields: [authorId], references: [id])
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  PostCategory PostCategory[]
 
   @@map("posts")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  user_name String   @unique
+  email     String
+  role      UserRole @default(user)
+  Profile   Profile?
+  Post      Post[]
+
+  @@map("users")
+}
+
+model Profile {
+  id     Int    @id @default(autoincrement())
+  bio    String
+  userId Int    @unique
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@map("profiles")
+}
+
+model Category {
+  id           Int            @id @default(autoincrement())
+  name         String
+  PostCategory PostCategory[]
+}
+
+model PostCategory {
+  postId     Int
+  post       Post     @relation(fields: [postId], references: [id])
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  @@id([postId, categoryId])
+  @@map("post_category")
+}
+
+enum UserRole {
+  user
+  admin
 }

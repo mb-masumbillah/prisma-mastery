@@ -38,8 +38,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev --respawn --transpile-only src/pagination-sorting.ts",
-    "migrate": "npx prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script > prisma/migrations/0_init/migration.sql"
+    "dev": "ts-node-dev --respawn --transpile-only src/logging.ts",
+    "migrate": "npx prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script > prisma/migrations/0_init/migration.sql",
+    "migrate-reset": "npx prisma migrate reset",
+    "studio": "npx prisma studio"
   },
   "keywords": [],
   "author": "",
