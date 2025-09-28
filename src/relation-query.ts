@@ -18,19 +18,18 @@ const relationQuery = async () => {
     })
     .Post();
 
-        // relational fillters
-        const publishedPostUsers = await prisma.user.findMany({
-            include:{
-                Post:{
-                    where:{
-                        published: true
-                    }
-                }
-            }
-        })
+  // relational fillters
+  const publishedPostUsers = await prisma.user.findMany({
+    include: {
+      Post: {
+        where: {
+          published: true,
+        },
+      },
+    },
+  });
 
-        console.dir(publishedPostUsers, {depth: Infinity})
-
+  console.dir(publishedPostUsers, { depth: Infinity });
 };
 
 relationQuery();
