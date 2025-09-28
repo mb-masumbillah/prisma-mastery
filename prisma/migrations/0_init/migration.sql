@@ -1,4 +1,3 @@
--- Active: 1757815483896@@127.0.0.1@5432@prisma_mastery
 -- CreateSchema
 CREATE SCHEMA IF NOT EXISTS "public";
 
@@ -21,6 +20,7 @@ CREATE TABLE "public"."posts" (
 -- CreateTable
 CREATE TABLE "public"."users" (
     "id" SERIAL NOT NULL,
+    "name" TEXT,
     "user_name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "role" "public"."UserRole" NOT NULL DEFAULT 'user',

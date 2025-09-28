@@ -24,6 +24,7 @@ model Post {
 
 model User {
   id        Int      @id @default(autoincrement())
+  name      String?
   user_name String   @unique
   email     String
   role      UserRole @default(user)
